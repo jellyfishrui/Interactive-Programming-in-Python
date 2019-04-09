@@ -1,0 +1,81 @@
+# CodeSkulptor address: http://www.codeskulptor.org/#user45_DJQ9DaaAYt_4.py
+# "Stopwatch: The Game"
+# The original script was completed with Python 2.7 on CodeSkulptor
+
+# define global variables
+import simplegui
+
+t = 0
+counter_whole_number = 0
+counter_stop = 0
+stopwatch_running = False
+
+
+# define helper function format that converts time
+# in tenths of seconds into formatted string A:BC.D
+def format(t):
+    minutes = t // 600
+    seconds = (t % 600) / 10
+    tenth_of_seconds = t - 600 * minutes - 10 * seconds
+    if seconds < 10:
+        return str(minutes) + ":0" + str(seconds) + "." + str(tenth_of_seconds)
+    else:
+        return str(minutes) + ":" + str(seconds) + "." + str(tenth_of_seconds)
+
+    # define event handlers for buttons; "Start", "Stop", "Reset"
+def start():
+    global stopwatch_running
+    timer.start()
+    stopwatch_running = True
+    format(t)
+
+
+def stop():
+    global counter_whole_number, counter_stop, stopwatch_running
+    timer.stop()
+    
+    if stopwatch_running == True:
+        counter_stop += 1
+    
+    stopwatch_running = False
+    
+    if t % 10 == 0:
+       counter_whole_number +=1
+    else:
+        None
+
+
+def reset():
+    global t, counter_whole_number, counter_stop
+    stop()
+    t = 0
+    counter_whole_number = 0
+    counter_stop = 0
+
+
+# define event handler for timer with 0.1 sec interval
+def timer_handler():
+    global t
+    t += 1
+
+
+# define draw handler
+def draw(canvas):
+    canvas.draw_text(format(t), [30, 120], 60, "White")
+    canvas.draw_text(str(counter_whole_number) + "/" + str(counter_stop), [150, 40], 30, "Red")
+
+    # create frame and buttons
+frame = simplegui.create_frame("Stopwatch", 200, 200)
+frame.set_canvas_background("Black")
+frame.set_draw_handler(draw)
+button_start = frame.add_button("Start", start, 100)
+button_stop = frame.add_button("Stop", stop, 100)
+button_reset = frame.add_button("Reset", reset, 100)
+
+    # register event handlers
+timer = simplegui.create_timer(100, timer_handler)
+
+    # start frame
+frame.start()
+
+
