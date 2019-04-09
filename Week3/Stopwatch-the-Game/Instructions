@@ -21,4 +21,3 @@ Mini-project development process
     Add "Start" and "Stop" buttons whose event handlers start and stop the timer. Next, add a "Reset" button that stops the timer 
     and reset the current time to zero. The stopwatch should be stopped when the frame opens.
    
-   
