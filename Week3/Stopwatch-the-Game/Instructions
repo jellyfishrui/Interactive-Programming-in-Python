@@ -5,8 +5,6 @@ stopwatch that keeps track of the time in tenths of a second.
 
 The stopwatch should contain "Start", "Stop" and "Reset" buttons. 
 
-<img src="Stopwatch-the-Game/StopWatch.jpg" width = 100>
-
 Mini-project development process
 
     Construct a timer with an associated interval of 0.1 seconds whose event handler increments a global integer. 
