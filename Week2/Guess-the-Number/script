@@ -1,0 +1,116 @@
+The original script was completed with Python 2.7 on CodeSkulptor, which can be accessed via the link below:
+http://www.codeskulptor.org/#user45_xnoqEICF4G_2.py
+
+# "Guess the number" mini-project
+# input will come from buttons and an input field
+# all output for the game will be printed in the console
+
+import simplegui
+import random
+
+
+#Define global variables 
+number_of_guesses = 7
+guess_range = 100
+secret_number = 0
+
+
+# helper function to start and restart the game
+def new_game():
+    # initialize global variables used in your code here
+    global number_of_guesses
+    global guess_range
+    global secret_number
+    
+    if guess_range == 100:
+        number_of_guesses = 7
+    elif guess_range == 1000:
+        number_of_guesses = 10
+    else:
+        print "Error: Guess range can only be 100 or 1000."
+    
+    secret_number = random.randrange(0,guess_range)
+    
+    print "Welcome to the new game! Guess a number from 0 to " + str(guess_range) + "."
+    print "You have " + str(number_of_guesses) + " opportunities!"
+
+
+# define event handlers for control panel
+def range100():
+    # button that changes the range to [0,100) and starts a new game 
+    global guess_range
+    guess_range = 100
+    new_game()
+    
+
+def range1000():
+    # button that changes the range to [0,1000) and starts a new game     
+    global guess_range
+    guess_range = 1000
+    new_game()
+    
+    
+def input_guess(guess):
+    global number_of_guesses
+    if number_of_guesses <1:
+        #inform the player he/she has used all the guessing opportunities
+        print "Sorry, you have used all the guessing opportunities!"
+        new_game()
+        
+    elif number_of_guesses == 1:
+        #Make this a separate case to avoid printing "You have 0 opportunities!"
+        print "Guess was " + guess
+        #Compare the guess number with the secret number
+        #A correct guess automatically starts a new game with [1,100) as the guess range
+        if int(guess) == secret_number:
+            print "Correct"
+            new_game()
+        elif int(guess) > secret_number:
+            print "Lower"
+            number_of_guesses -= 1
+            print "Sorry, you have used all the guessing opportunites!"
+            new_game()
+        else:
+            print "Higher"
+            number_of_guesses -= 1
+            print "Sorry, you have used all the guessing opportunities!"
+            new_game()
+            
+    else:
+        # main game logic goes here	
+        print "Guess was " + guess
+        #Compare the guess number with the secret number
+        #A correct guess automatically starts a new game with [1,100) as the guess range
+        if int(guess) == secret_number:
+            print "Correct"
+            new_game()
+        elif int(guess) > secret_number:
+            print "Lower"
+            number_of_guesses -= 1
+            print "You have " + str(number_of_guesses) + " opportunities to guess!"
+        else:
+            print "Higher"
+            number_of_guesses -= 1
+            print "You have " + str(number_of_guesses) + " opportunities to guess!"
+            
+# create a frame
+frame = simplegui.create_frame("Guess the Number", 200, 200)
+
+# register event handlers for control elements and start frame
+frame.add_input("Enter your guess", input_guess, 200)
+frame.add_button("Range is [0, 100)", range100, 200)
+frame.add_button("Range is [0, 1000)", range1000, 200)
+
+# call new_game 
+new_game()
+frame.start()
+
+#Test code
+secret_number = 74	
+#input_guess("50")
+#input_guess("75")
+#input_guess("62")
+#input_guess("68")
+#input_guess("71")
+#input_guess("73")
+#input_guess("74")
