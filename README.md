@@ -6,4 +6,4 @@ This two-part course is designed to help students with very little or no computi
 
 
 Instructors: Prof. John Greiner, Stephen Wong, Prof.Scott Rixner, and Prof. Joe Warren at Rice University.
-
+All products are written with Python 2.7 in CodeSkulptor.
