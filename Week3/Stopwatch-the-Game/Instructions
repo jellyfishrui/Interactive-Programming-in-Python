@@ -1,0 +1,24 @@
+Mini-project description - "Stopwatch: The Game"
+
+Our mini-project for this week will focus on combining text drawing in the canvas with timers to build a simple digital 
+stopwatch that keeps track of the time in tenths of a second. 
+
+The stopwatch should contain "Start", "Stop" and "Reset" buttons. 
+
+Mini-project development process
+
+    Construct a timer with an associated interval of 0.1 seconds whose event handler increments a global integer. 
+    (Remember that create_timer takes the interval specified in milliseconds.) This integer will keep track of the time in tenths of seconds.
+    Test your timer by printing this global integer to the console. Use the CodeSkulptor reset button in the blue menu bar to terminate your
+    program and stop the timer and its print statements. Important: Do not use floating point numbers to keep track of tenths of a second! 
+    While it's certainly possible to get it working, the imprecision of floating point can make your life miserable. Use an integer instead,
+    i.e., 12 represents 1.2 seconds.
+    
+    Write the event handler function for the canvas that draws the current time (simply as an integer, you should not worry about formatting 
+    it yet) in the middle of the canvas. Remember that you will need to convert the current time into a string using 
+    str before drawing it.
+    
+    Add "Start" and "Stop" buttons whose event handlers start and stop the timer. Next, add a "Reset" button that stops the timer 
+    and reset the current time to zero. The stopwatch should be stopped when the frame opens.
+   
+   
