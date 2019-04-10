@@ -5,3 +5,16 @@ we will keep our model for Memory fairly simple. A Memory deck consists of eight
 
 
 See the gif file in this folder for the effects.
+
+1) The game draws 16 cards on the canvas (horizontally or as a grid).
+2) The cards appear in eight unique pairs.
+3) The game ignores clicks on exposed cards.
+4) At the start of the game, a click on a card exposes the card that was clicked on.
+5) If one unpaired card is exposed, a click on a second unexposed card exposes the card that was clicked on.
+6) If two unpaired cards are exposed, a click on an unexposed card exposes the card that was clicked on and flips the two unpaired cards over.
+7) If all exposed cards are paired, a click on an unexposed card exposes the card that was clicked on and does not flip any other cards.
+8) Cards paired by two clicks in the same turn remain exposed until the start of the next game.
+9) The game updates and displays the number of turns in the current game in a label displayed in the control area. 
+The counter may be incremented after either the first or second card is flipped during a turn.
+10) The game includes a "Reset" button that resets the turn counter and restarts the game.
+11) The deck is also randomly shuffled each time the "Reset" button is pressed, so that the cards are in a different order each game.
