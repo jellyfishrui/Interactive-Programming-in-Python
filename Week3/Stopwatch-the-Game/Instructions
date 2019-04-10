@@ -20,3 +20,5 @@ Mini-project development process
     
     Add "Start" and "Stop" buttons whose event handlers start and stop the timer. Next, add a "Reset" button that stops the timer 
     and reset the current time to zero. The stopwatch should be stopped when the frame opens.
+    
+![StopWatch]("https://github.com/jellyfishrui/Interactive-Programming-in-Python-Rice-University/blob/master/Week3/Stopwatch-the-Game/StopWatch.gif")
