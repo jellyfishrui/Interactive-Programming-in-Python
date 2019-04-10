@@ -1,0 +1,113 @@
+# implementation of card game - Memory
+
+import simplegui
+import random
+
+# define global variables
+WIDTH = 800
+HEIGHT = 100
+CARD_SIZE = 16
+CARD_WIDTH = WIDTH / CARD_SIZE
+card_on_click = 0 #the i-th card that is currently being clicked on, equal to index number of card_set.
+state = 0 #the number of cards flipped
+card_set = range(8) + range(8)
+exposed = [False for i in range(len(card_set))]
+click1 = 0 # index of the first card flipped
+click2 = 0 # index of the second card flipped
+
+
+# helper function to initialize globals
+def new_game():
+    global card_set, exposed, state, turns, click1, click2
+    random.shuffle(card_set)
+    exposed = [False, False, False, False, False, False, False, False, 
+           False, False, False, False, False, False, False, False]
+    state = 0
+    turns = 0
+    click1 = 0
+    click2 = 0
+    label.set_text("Turns = " + str(turns))
+    
+# define event handlers
+
+def status():
+    """ 
+    check how many cards are flipped with values hidden, 
+    and determine whether to flip the card being clicked"""
+    
+    global state, card_on_click, exposed, turns, click1, click2
+    
+    if exposed[card_on_click] == True:
+        return
+    
+    if state == 0:
+        state = 1
+        turns += 1
+        click1 = card_on_click
+        exposed[click1] = True
+    
+    elif state == 1:
+        if card_on_click != click1:
+            click2 = card_on_click
+            exposed[click2] = True
+            state = 2
+        
+    elif state == 2:
+        if card_set[click1] == card_set[click2]:
+            exposed[click1] = True
+            exposed[click2] = True
+            
+        else:
+            exposed[click1] = False
+            exposed[click2] = False
+            
+        click1 = card_on_click
+        exposed[click1] = True
+        state = 1
+        turns += 1
+    
+    label.set_text("Turns = " + str(turns))
+    
+    
+def mouseclick(pos):
+    global card_on_click, clicked
+    
+    if pos[1] <= 0 or pos[1] >= 100:
+        pass
+    elif pos[0] <= 0 or pos[0] >= WIDTH:
+        pass
+    else:
+        #flip the i-th card
+        card_on_click = pos[0] // CARD_WIDTH
+        status()
+
+                        
+# cards are logically 50x100 pixels in size    
+def draw(canvas):
+    # draw the numbers on the cards
+    for i in range(len(card_set)):
+        canvas.draw_text(str(card_set[i]), 
+                         [i * CARD_WIDTH + CARD_WIDTH / 5, 3 * HEIGHT / 4], 
+                         70, "White")
+    
+    # draw the cards
+    for i in range(len(exposed)):
+        if exposed[i] == False:
+            canvas.draw_polygon([[i * CARD_WIDTH, 0],
+                                 [i * CARD_WIDTH + CARD_WIDTH, 0], 
+                                 [i * CARD_WIDTH + CARD_WIDTH, 100],
+                                 [i * CARD_WIDTH, 100]], 1, "Black", "Green")
+
+
+# create frame and add a button and labels
+frame = simplegui.create_frame("Memory", WIDTH, HEIGHT)
+frame.add_button("Reset", new_game)
+label = frame.add_label("Turns = 0")
+
+# register event handlers
+frame.set_mouseclick_handler(mouseclick)
+frame.set_draw_handler(draw)
+
+# get things rolling
+new_game()
+frame.start()
